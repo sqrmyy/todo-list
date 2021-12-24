@@ -1,7 +1,9 @@
 <template>
   <div class="list-style">
     {{ category.title }}
-    <card v-for="card in cardList" :key="card.id" :card="card"> </card>
+    <card v-for="card in cardList" :key="card.id" :card="card" :isNew="false">
+    </card>
+    <card :card="newCard" :isNew="true"></card>
   </div>
 </template>
 
@@ -23,8 +25,14 @@ export default {
         (card) => card.categoryId === props.category.id
       )
     );
+    const newCard = {
+      id: -1,
+      text: '',
+      categoryId: props.category.id,
+    };
     return {
       cardList,
+      newCard,
     };
   },
 };
